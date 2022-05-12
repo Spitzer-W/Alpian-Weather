@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:alpian_weather/objects/cloudType.dart';
 import 'package:alpian_weather/objects/forecast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 late Future<Weather> futureWeather;
 late Future<Forecast> futureForecast;
+late String lastUpdated;
 
 class _MyAppState extends State<HomeScreen> {  
   @override
@@ -24,6 +26,8 @@ class _MyAppState extends State<HomeScreen> {
 
     futureWeather = fetchWeather();
     futureForecast = fetchForecast();
+    lastUpdated = 'Last updated: ${DateFormat("HH:mm").format(DateTime.now())}';
+  
   }
 
   @override
@@ -95,13 +99,18 @@ Future<Weather> fetchWeather() async {
       
       return Weather(
         temperature: 0,
+        clouds: '?',
         description: '?',
         humidity: 0,
         location: '?',
         minTemperature: 0,
-        maxTemperature: 0,
-        lastUpdated: 'Last updated: ${DateFormat("HH:mm").format(DateTime.now())}'
+        maxTemperature: 0
+        // lastUpdated: 'Last updated: ${DateFormat("HH:mm").format(DateTime.now())}'
       );
+  }
+  finally {
+    lastUpdated = 'Last updated: ${DateFormat("HH:mm").format(DateTime.now())}';
+    
   }
 }
 
@@ -128,6 +137,12 @@ Future<Forecast> fetchForecast() async {
         );
   }
 }
+
+List<CloudType> _cloudTypes = [
+    CloudType('Clouds', Icons.cloud),
+    CloudType('Rain', Icons.water_drop),
+    CloudType('Science', Icons.wb_sunny),
+];
 
 _fiveD1ayForecast() {
   return Expanded(
@@ -181,10 +196,10 @@ _fiveD1ayForecast() {
                         ),
                       child: Row(
                         children: [
-                          Text(DateFormat("EEE").format(DateTime.now().add(Duration(days: index + 1)))),
-                          const Spacer(),
-                          const Icon(Icons.cloud),
-                          const Spacer(),
+                          Text(DateFormat("EEEEE").format(DateTime.now().add(Duration(days: index + 1)))),
+                          const SizedBox(width: 50),
+                          Icon(_cloudTypes.where((element) => element.name == currentForecast.data!.description).first.icon),
+                          const SizedBox(width: 50),
                           Text('${currentForecast.data!.temperature}'),
                           const Spacer(),
                           Text('${currentForecast.data!.minTemperature}'),
@@ -251,7 +266,8 @@ _fiveDayForecast() {
                       children: [
                         Text(DateFormat("EEE").format(DateTime.now().add(Duration(days: index + 1)))),
                         const Spacer(),
-                        const Icon(Icons.cloud),
+                       
+                          Icon(_cloudTypes.where((element) => element.name == currentForecast.data!.description).first.icon),
                         const Spacer(),
                         Text('${currentForecast.data!.temperature}'),
                         const Spacer(),
@@ -299,17 +315,18 @@ _hourlyPrediction() {
 
 
 _lastUpdated() {
-    return FutureBuilder<Weather>(
-      future: futureWeather,
-      builder: (context, currentWeather) {
-        return currentWeather.hasData ?
+    // return FutureBuilder<Weather>(
+    //   future: futureWeather,
+    //   builder: (context, currentWeather) {
+        return //currentWeather.hasData ?
             Padding(
               padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-              child: Text(currentWeather.data!.lastUpdated),
-            )
+              child: 
+              Text(lastUpdated)
+            );
     // default to spinner
-    : const Center(child: CircularProgressIndicator());
-    });
+    // : const Center(child: CircularProgressIndicator());
+    // });
 }
 
 _date() {
@@ -407,36 +424,38 @@ _temperature() {
 
 // create widget for displaying the current weather icon
 _cloudIcon() {
-  // return FutureBuilder<Weather>(
-  //     future: futureWeather,
-  //     builder: (context, currentWeather) {
-  //       return currentWeather.hasData ?
-  //          Column(
-  //             children: [
-  //               const Icon(
-  //                 Icons.cloud, 
-  //                 size: 80
-  //                 ),
-  //               Text(
-  //                 currentWeather.data!.temperature, 
-  //                 style: const TextStyle(
-  //                 fontSize: 70,
-  //                 fontWeight: FontWeight.w100
-  //               ),
-  //             )],
-  //           )
-          
 
-  //       // default to spinner
-  //       : const CircularProgressIndicator();
-  //     },
-  //   );
+  return FutureBuilder<Weather>(
+    future: futureWeather,
+    builder: (context, currentWeather) {
+      if  (currentWeather.hasData) {
+        final desc = currentWeather.data!.clouds;
+        switch (currentWeather.data!.clouds) {
+          case 'rain':
+            return const Icon(
+              Icons.water_drop, 
+              size: 80
+            );
+          case 'Clouds':
+            return const Icon(
+              Icons.water_drop, 
+              size: 80
+            );
+          default:
+            return const Icon(
+              Icons.cloud, 
+              size: 80
+            );
+        }
+      } 
+      else 
+      {
+        return const Icon(
+          Icons.cloud, 
+          size: 80
+        );
+      }
 
-
-
-
-  return const Icon(
-            Icons.cloud, 
-            size: 80
-          );
+    }
+  );
 }
