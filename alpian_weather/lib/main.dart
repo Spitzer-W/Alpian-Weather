@@ -15,10 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Alpian Weather',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark),
       initialRoute: '/',
       routes: {
         '/': (_) => HomeScreen(),
@@ -27,5 +24,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
