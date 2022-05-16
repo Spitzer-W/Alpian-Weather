@@ -68,7 +68,8 @@ This endpoint provides the following data:
 - Historical weather data for the previous 5 days
 
 I use the API call specified in the https://openweathermap.org/one-call-api endpoint to fetch the latest forecast data with the following parameters:
-- q => is the city we want to check; London
+- lat => is the latitude we want to check; 51.509865
+- lon => is the longitude we want to check; -0.118092
 - units => is the type we want returned for measurements; metric
 - appId => the API key we registered
 
@@ -77,7 +78,7 @@ I then map the json data to a HourlyForecast object defined with the following p
   - String iconId;
   - DateTime time;
 
-<img width="889" alt="Screenshot 2022-05-16 at 12 59 35" src="https://user-images.githubusercontent.com/52418829/168588145-a54c20fb-2f71-43e1-9d69-39795c08bf2e.png">
+<img width="1018" alt="Screenshot 2022-05-16 at 14 19 50" src="https://user-images.githubusercontent.com/52418829/168601879-b9f1bd4f-f122-48ce-8296-b766752002b1.png">
 
 
 ## Improvements
