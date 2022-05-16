@@ -44,10 +44,10 @@ I use the API call specified in the https://openweathermap.org/forecast5 endpoin
 
 I then map the json data to a Forecast object defined with the following properties:
   - String description;
-  - double temperature;
+  - String temperature;
   - int humidity;
-  - double minTemperature;
-  - double maxTemperature;
+  - String minTemperature;
+  - String maxTemperature;
   - String iconId;
   - DateTime date;
   
@@ -71,6 +71,11 @@ I use the API call specified in the https://openweathermap.org/one-call-api endp
 - q => is the city we want to check; London
 - units => is the type we want returned for measurements; metric
 - appId => the API key we registered
+
+I then map the json data to a HourlyForecast object defined with the following properties:
+  - String temperature;
+  - String iconId;
+  - DateTime time;
 
 <img width="889" alt="Screenshot 2022-05-16 at 12 59 35" src="https://user-images.githubusercontent.com/52418829/168588145-a54c20fb-2f71-43e1-9d69-39795c08bf2e.png">
 
