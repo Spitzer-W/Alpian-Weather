@@ -55,7 +55,7 @@ I then map the json data to a Forecast object defined with the following propert
 
 
 ## Hourly
-This feature was included as a bonus as I felt it served a better purpose to the user and would ahave more of a practical use.
+This feature was included as a bonus as I felt it served a better purpose to the user and would have more of a practical use.
 
 While implementing the hourly forecast I found that this endpoint also returns all of the data required for both of the above features so the same could be achieved with 1 get request.
 
