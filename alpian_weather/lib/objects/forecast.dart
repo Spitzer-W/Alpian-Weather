@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 
 class Forecast {
   final String description;
-  final double temperature;
+  final String temperature;
   final int humidity;
-  final double minTemperature;
-  final double maxTemperature;
+  final String minTemperature;
+  final String maxTemperature;
   final String iconId;
   final DateTime date;
 
@@ -21,13 +21,12 @@ class Forecast {
 
   factory Forecast.fromJson(Map<String, dynamic> json) {
     return Forecast(
-        description: json['list'][0]['weather'][0]['main'],
-        temperature: json['list'][0]['main']['temp'],
-        humidity: json['list'][0]['main']['humidity'],
-        minTemperature: json['list'][0]['main']['temp_min'],
-        maxTemperature: json['list'][0]['main']['temp_max'],
-        iconId:
-            json['list'][0]['weather'][0]['icon'].toString().substring(0, 2),
-        date: DateTime.parse(json['list'][0]['dt_txt'].toString()));
+        description: json['weather'][0]['main'],
+        temperature: json['main']['temp'].toString().substring(0, 2),
+        humidity: json['main']['humidity'],
+        minTemperature: json['main']['temp_min'].toString().substring(0, 2),
+        maxTemperature: json['main']['temp_max'].toString().substring(0, 2),
+        iconId: json['weather'][0]['icon'].toString().substring(0, 2),
+        date: DateTime.parse(json['dt_txt']));
   }
 }

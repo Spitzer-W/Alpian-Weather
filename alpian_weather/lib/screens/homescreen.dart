@@ -222,8 +222,8 @@ class _HourlyPrediction extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                    DateFormat("hh a").format(DateTime.now()
-                                        .add(Duration(hours: index))),
+                                    DateFormat("h a")
+                                        .format(snapshot.data![index].time),
                                     style: const TextStyle(fontSize: 9)),
                                 Padding(
                                   padding:
@@ -298,7 +298,7 @@ class _FiveDayForecast extends StatelessWidget {
                       ((element) => DataRow(
                             cells: <DataCell>[
                               DataCell(SizedBox(
-                                width: 60,
+                                width: 70,
                                 child: Text(
                                     DateFormat("EEE hh:mm a")
                                         .format(element.date),
@@ -307,15 +307,15 @@ class _FiveDayForecast extends StatelessWidget {
                               DataCell(
                                   Center(child: getIcons(element.iconId, 20))),
                               DataCell(Center(
-                                child: Text('${element.temperature.toInt()}',
+                                child: Text(element.temperature,
                                     style: const TextStyle(fontSize: 10)),
                               )),
                               DataCell(Center(
-                                child: Text('${element.minTemperature.toInt()}',
+                                child: Text(element.minTemperature,
                                     style: const TextStyle(fontSize: 10)),
                               )),
                               DataCell(Center(
-                                child: Text('${element.maxTemperature.toInt()}',
+                                child: Text(element.maxTemperature,
                                     style: const TextStyle(fontSize: 10)),
                               )),
                             ],
