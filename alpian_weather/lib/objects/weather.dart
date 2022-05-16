@@ -25,7 +25,7 @@ class Weather extends ChangeNotifier {
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
       description: json['weather'][0]['description'],
-      iconId: json['weather'][0]['main'],
+      iconId: json['weather'][0]['icon'].toString().substring(0, 2),
       temperature: json['main']['temp'],
       humidity: json['main']['humidity'],
       location: json['name'],
