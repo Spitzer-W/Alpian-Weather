@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:intl/intl.dart';
-import 'objects/Weather.dart';
+import '../objects/Weather.dart';
 import 'package:http/http.dart' as http;
 
-import 'objects/forecast.dart';
-import 'objects/hourlyforecast.dart';
+import '../objects/forecast.dart';
+import '../objects/hourlyforecast.dart';
 
 class ApiService {
   late Future<Weather> futureWeather = fetchCurrentWeather();

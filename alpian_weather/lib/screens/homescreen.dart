@@ -1,4 +1,4 @@
-import 'package:alpian_weather/api_service.dart';
+import 'package:alpian_weather/providers/api_service.dart';
 import 'package:alpian_weather/objects/Weather.dart';
 import 'package:alpian_weather/objects/forecast.dart';
 import 'package:alpian_weather/objects/hourlyforecast.dart';
