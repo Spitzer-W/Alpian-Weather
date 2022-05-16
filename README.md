@@ -3,6 +3,8 @@
 ## Description
 This purpose of this project is to build a simple flutter application that displays the current weather info in London and the weather forecasts for the next 5 days. The final user should also be able to refresh the view by pressing on a button located in the app bar.
 
+<img width="200" alt="Screenshot 2022-05-16 at 12 22 38" src="https://user-images.githubusercontent.com/52418829/168598742-5b40894b-e425-4cc4-b12d-59a3edd65ffc.png">
+
 This will be achieved using the open weather map API that can be found here: https://openweathermap.org/
 For this project we will be making use of the following endpoints:
 - https://openweathermap.org/current
